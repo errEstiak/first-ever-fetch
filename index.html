@@ -38,4 +38,45 @@
     </div>
   </div>
 </body>
+<script>
+  const requestUrl = 'https://api.github.com/users/errEstiak'
+  const xhr = new XMLHttpRequest()
+  xhr.open('GET', requestUrl)
+  // console.log('here');
+  // xhr.onreadystatechange = function () {
+  //   console.log(xhr.readyState);
+  //   if (xhr.readyState == 4) {
+  //     // const data = this.responseText
+  //     const data = JSON.parse(this.responseText)// now the parse convert the string into object
+  //     // console.log(this.responseText);
+  //     // ++++++++++++++++++++++++++++++
+  //     // ******************************
+  //     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  //     // data come from api usually in string from but we are accessing like object, that's why it's showing undefined
+  //     console.log(data);
+  //     console.log(typeof data);
+  //     console.log(data.followers);
+  //   }
+  // }
+
+  // 
+  // 
+  // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  // assignment
+  const pImg = document.querySelector('#profileImg')
+  const uName = document.querySelector('#uName')
+  const uFollowers = document.querySelector('#follower')
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      const data = JSON.parse(this.responseText)
+      pImg.src = data.avatar_url
+      uName.innerHTML = `<h2> <b> ${data.name} </b> </h2>`
+      uFollowers.innerHTML = `<p>Followers: ${data.followers}</p>`
+      console.log(data);
+    }
+  }
+  xhr.send()
+
+</script>
+
 </html>
